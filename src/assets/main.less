@@ -1,0 +1,96 @@
+@import './base.less';
+
+:root {
+    /* Game icons styles */
+    --game-icon-border-color-1: #e8c17d;
+    --game-icon-border-color-2: #705424;
+    --game-icon-outer-border-color: #1b1e1d;
+
+    --heartsteel-icon-size: 300px;
+    --heartsteel-icon-border-radius: 4px;
+    --heartsteel-icon-border-width: 16px;
+    --heartsteel-icon-outer-border-width: 2px;
+    --heartsteel-icon-border-background: radial-gradient(
+            170% 170% at 20% -20%,
+            var(--game-icon-border-color-1),
+            var(--game-icon-border-color-2)
+    );
+    --heartsteel-icon-border-background-hovered: radial-gradient(
+            120% 120% at 40% 40%,
+            var(--game-icon-border-color-1),
+            var(--game-icon-border-color-2)
+    );
+    --heartsteel-icon-stack-count-text-right: 24px;
+    --heartsteel-icon-stack-count-text-bottom: 8px;
+
+    --heartsteel-icon-inner-size: calc(
+            var(--heartsteel-icon-size)
+            - var(--heartsteel-icon-border-width) * 2
+            - var(--heartsteel-icon-outer-border-width) * 2
+    );
+
+    --heartsteel-icon-stack-count-text-color: white;
+    --heartsteel-icon-stack-count-text-size: 64px;
+
+    @media (max-width: 480px) {
+        --heartsteel-icon-size: 200px;
+        --heartsteel-icon-border-radius: 2px;
+        --heartsteel-icon-border-width: 8px;
+        --heartsteel-icon-outer-border-width: 1px;
+        --heartsteel-icon-stack-count-text-right: 16px;
+        --heartsteel-icon-stack-count-text-bottom: 4px;
+        --heartsteel-icon-stack-count-text-size: 48px;
+    }
+    @media (max-width: 280px) {
+        --heartsteel-icon-size: 150px;
+        --heartsteel-icon-stack-count-text-right: 12px;
+        --heartsteel-icon-stack-count-text-bottom: 4px;
+        --heartsteel-icon-stack-count-text-size: 32px;
+    }
+
+    /* Health Bar styles */
+    --health-bar-height: 32px;
+    --health-bar-border-width: 2px;
+    --health-bar-border-color: #c3c3c3;
+    --health-bar-border-radius: 4px;
+    --health-bar-inner-border-radius: 2px;
+    --health-bar-background-color: #6dc414;
+
+    /* Charging Progress styles */
+    --charging-progress-text-size: 12px;
+    --charging-progress-dot-radius: 4px;
+    --charging-progress-dot-border-width: 0.9px;
+    --charging-progress-dot-border-color: var(--game-icon-border-color-1);
+    --charging-progress-dot-background: #020b0b;
+    --charging-progress-dot-background-activated: #027370;
+    --charging-progress-dot-background-final: #b5eae9;
+    --charging-progress-dot-gap: 8px;
+
+    /* Circle Button styles */
+    --circle-button-size: 64px;
+    --circle-button-inner-size: 60px;
+    --circle-button-border-background: radial-gradient(
+            170% 170% at 20% -20%,
+            var(--game-icon-border-color-1),
+            var(--game-icon-border-color-2)
+    );
+    --circle-button-border-background-hovered: radial-gradient(
+            120% 120% at 40% 40%,
+            var(--game-icon-border-color-1),
+            var(--game-icon-border-color-2)
+    );
+    --circle-button-icon-fill: #c09b6a;
+
+    --circle-button-inner-background: #020b0b;
+    --circle-button-hover-gradient-color-1: #144c49;
+    --circle-button-hover-gradient-color-2: #051213;
+    --circle-button-inner-background-hovered: radial-gradient(
+            120% 120% at 50% 50%,
+            var(--circle-button-hover-gradient-color-2) 10%,
+            var(--circle-button-hover-gradient-color-1) 80%
+    );
+}
+
+body {
+    font-family: "Kanit", "Noto Sans SC", sans-serif;
+}
