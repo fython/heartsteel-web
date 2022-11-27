@@ -104,6 +104,7 @@ watch(toRef(props, "stackCount"), (newVal, oldVal) => {
 
   color: var(--heartsteel-icon-stack-count-text-color);
   font-size: var(--heartsteel-icon-stack-count-text-size);
+  font-weight: 500;
 
   text-shadow: 0 3px 2px #000000, 0 0 16px #303030;
 }
