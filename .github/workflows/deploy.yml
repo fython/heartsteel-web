@@ -52,3 +52,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
           cname: heartsteel.gwo.app
+          allow_empty_commit: true
