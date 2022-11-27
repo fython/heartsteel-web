@@ -74,7 +74,6 @@ document.addEventListener("keypress", (event) => {
       />
       <!-- Help & About -->
       <game-tips class="app-game-tips" />
-      <br />
       <related-links class="app-related-links" />
     </div>
 
@@ -114,7 +113,6 @@ main {
   max-width: 500px;
   font-size: 14px;
 }
-
 .passive-title {
   font-weight: bold;
   color: var(--circle-button-icon-fill);
@@ -147,7 +145,32 @@ main {
 }
 
 .app-related-links {
+  margin-top: 32px;
   width: calc(100% - 16px);
+}
+
+@media screen and (max-height: 700px) {
+  .passive-text {
+    font-size: 12px;
+  }
+
+  .user-health-bar-text {
+    margin-top: 8px;
+    font-size: 12px;
+  }
+
+  .app-play-button,
+  .app-attack-button {
+    margin-top: 16px;
+  }
+
+  .app-game-tips {
+    margin-top: 8px;
+  }
+
+  .app-related-links {
+    margin-top: 8px;
+  }
 }
 
 .background {
