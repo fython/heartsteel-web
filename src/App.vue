@@ -78,13 +78,10 @@ document.addEventListener("keypress", (event) => {
     </div>
 
     <div class="background">
-      <video
-        class="background-video"
-        src="./assets/media/meme-background.webm"
-        autoplay
-        muted
-        loop
-      />
+      <video class="background-video" autoplay muted loop>
+        <source src="./assets/media/meme-background.mp4" type="video/mp4" />
+        <source src="./assets/media/meme-background.webm" type="video/webm" />
+      </video>
       <div class="background-layer" />
     </div>
   </main>
@@ -175,13 +172,19 @@ main {
 
 .background {
   position: absolute;
-  inset: 0;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
   z-index: -1;
   background: black;
 
   .background-video {
     position: absolute;
-    inset: 0;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
     width: 100%;
     height: 100vh;
     object-fit: cover;
@@ -189,7 +192,10 @@ main {
 
   .background-layer {
     position: absolute;
-    inset: 0;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
     background: black;
     opacity: 0.6;
   }
