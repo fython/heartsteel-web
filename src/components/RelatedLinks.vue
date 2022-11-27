@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { VueFinalModal } from "vue-final-modal";
 import { inject, ref } from "vue";
 import { useMainSettings } from "@/game/main-settings";
-import MainController from "@/game/main-controller";
+import type MainController from "@/game/main-controller";
 
 const qrcodeVisible = ref(false);
 const licenseVisible = ref(false);
@@ -287,13 +286,13 @@ const { soundEnabled, vibrateEnabled } = useMainSettings();
   }
 }
 
-::v-deep .modal-container {
+:deep(.modal-container) {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-::v-deep .modal-content {
+:deep(.modal-content) {
   display: flex;
   flex-direction: column;
   margin: 0 1rem;

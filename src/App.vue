@@ -12,7 +12,7 @@ import RelatedLinks from "@/components/RelatedLinks.vue";
 
 const ctrl = new MainController();
 const isPlaying = ref(false);
-const attackButton = ref<AttackButton>();
+const attackButton = ref<typeof AttackButton>();
 
 const maxHP = computed(() => {
   if (isPlaying.value) {
@@ -30,7 +30,7 @@ const play = () => {
 provide("main-controller", ctrl);
 
 document.addEventListener("keypress", (event) => {
-  if (event.code === "Space") {
+  if (isPlaying.value && event.code === "Space") {
     attackButton.value?.onClick();
   }
 });

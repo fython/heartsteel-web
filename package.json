@@ -10,6 +10,9 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@fontsource/kanit": "^4.5.10",
+    "@fontsource/noto-sans-sc": "^4.5.12",
+    "@fontsource/roboto-condensed": "^4.5.9",
     "lodash-es": "^4.17.21",
     "random-int": "^3.0.0",
     "vue": "^3.2.41",
