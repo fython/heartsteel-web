@@ -115,7 +115,7 @@ defineExpose({
   }
 
   .circle-button-icon {
-    transform: scale(75%);
+    transform: scale(0.75);
     z-index: 5;
 
     user-select: none;
