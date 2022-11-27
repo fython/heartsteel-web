@@ -168,7 +168,11 @@ const { soundEnabled, vibrateEnabled } = useMainSettings();
       content-class="modal-content"
     >
       <span class="modal__title">通过二维码分享 “心之钢模拟器”</span>
-      <img src="../assets/media/qrcode.png" alt="Heartsteel 网站" />
+      <img
+        class="qrcode-img"
+        src="../assets/media/qrcode.png"
+        alt="Heartsteel 网站"
+      />
     </vue-final-modal>
 
     <vue-final-modal
@@ -309,6 +313,10 @@ const { soundEnabled, vibrateEnabled } = useMainSettings();
     font-size: 18px;
     font-weight: bold;
   }
+}
+
+.qrcode-img {
+  object-fit: contain;
 }
 
 .license-content {
