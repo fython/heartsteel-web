@@ -49,7 +49,10 @@ defineExpose({
     border-radius: calc(var(--circle-button-size) / 2);
     z-index: 1;
     content: "";
-    inset: 0;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
     background: var(--heartsteel-icon-border-background-hovered);
     opacity: 0;
     transition: opacity 0.25s linear;
@@ -63,7 +66,10 @@ defineExpose({
 .circle-button {
   position: absolute;
   z-index: 3;
-  inset: 0;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
   margin: calc(
     (var(--circle-button-size) - var(--circle-button-inner-size)) / 2
   );
@@ -75,6 +81,10 @@ defineExpose({
 
   font-family: "Friz Quadrata Std Medium", sans-serif;
   font-size: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
@@ -89,7 +99,10 @@ defineExpose({
     border-radius: calc(var(--circle-button-inner-size) / 2);
     z-index: 4;
     content: "";
-    inset: 0;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
     background: var(--circle-button-inner-background-hovered);
     opacity: 0;
     transition: opacity 0.15s linear;
@@ -102,9 +115,7 @@ defineExpose({
   }
 
   .circle-button-icon {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(75%);
+    transform: scale(75%);
     z-index: 5;
 
     user-select: none;
