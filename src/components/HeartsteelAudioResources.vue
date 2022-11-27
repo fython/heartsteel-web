@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import type { HeartsteelResourcesProvider } from "@/game/items/heartsteel";
-import HeartsteelStackSFX1 from "@/assets/media/Heartsteel_stack_SFX_1.ogg";
-import HeartsteelStackSFX2 from "@/assets/media/Heartsteel_stack_SFX_2.ogg";
-import HeartsteelStackSFX3 from "@/assets/media/Heartsteel_stack_SFX_3.ogg";
-import HeartsteelStackSFX4 from "@/assets/media/Heartsteel_stack_SFX_4.ogg";
-import Heartsteel3rdStackSFX1 from "@/assets/media/Heartsteel_3rd_stack_SFX_1.ogg";
-import Heartsteel3rdStackSFX2 from "@/assets/media/Heartsteel_3rd_stack_SFX_2.ogg";
-import Heartsteel3rdStackSFX3 from "@/assets/media/Heartsteel_3rd_stack_SFX_3.ogg";
-import HeartsteelTriggerSFX1 from "@/assets/media/Heartsteel_trigger_SFX_1.ogg";
-import HeartsteelTriggerSFX2 from "@/assets/media/Heartsteel_trigger_SFX_2.ogg";
-import HeartsteelTriggerSFX3 from "@/assets/media/Heartsteel_trigger_SFX_3.ogg";
+import HeartsteelStackSFX1 from "@/assets/media/Heartsteel_stack_SFX_1.mp3";
+import HeartsteelStackSFX2 from "@/assets/media/Heartsteel_stack_SFX_2.mp3";
+import HeartsteelStackSFX3 from "@/assets/media/Heartsteel_stack_SFX_3.mp3";
+import HeartsteelStackSFX4 from "@/assets/media/Heartsteel_stack_SFX_4.mp3";
+import Heartsteel3rdStackSFX1 from "@/assets/media/Heartsteel_3rd_stack_SFX_1.mp3";
+import Heartsteel3rdStackSFX2 from "@/assets/media/Heartsteel_3rd_stack_SFX_2.mp3";
+import Heartsteel3rdStackSFX3 from "@/assets/media/Heartsteel_3rd_stack_SFX_3.mp3";
+import HeartsteelTriggerSFX1 from "@/assets/media/Heartsteel_trigger_SFX_1.mp3";
+import HeartsteelTriggerSFX2 from "@/assets/media/Heartsteel_trigger_SFX_2.mp3";
+import HeartsteelTriggerSFX3 from "@/assets/media/Heartsteel_trigger_SFX_3.mp3";
 import { installHeartsteelResourcesProvider } from "@/game/items/heartsteel";
 
 const rootEl = ref<HTMLDivElement | null>(null);
