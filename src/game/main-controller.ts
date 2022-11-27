@@ -1,9 +1,11 @@
 import { HeartsteelController } from "@/game/items/heartsteel";
-import { computed, type Ref, ref } from "vue";
+import { computed, readonly, type Ref, ref } from "vue";
 import { debounce } from "lodash-es";
+import { useMainSettings } from "@/game/main-settings";
 
 export default class MainController {
   private lastTriggerTime = 0;
+  private readonly vibrateEnabled: Ref<Boolean>;
   heartsteel: HeartsteelController;
   baseHP: Ref<number>;
   bonusHP = computed(
@@ -12,9 +14,16 @@ export default class MainController {
   maxHP = computed(() => this.baseHP.value + this.bonusHP.value);
 
   constructor(baseHP = 1000) {
+    this.vibrateEnabled = readonly(useMainSettings().vibrateEnabled);
+
     this.baseHP = ref(Math.max(baseHP, 500));
 
     this.heartsteel = new HeartsteelController(this.baseHP);
+  }
+
+  clearHeartsteelBonus(): void {
+    this.heartsteel.itemBonusHP.value = 0;
+    this.saveSlot();
   }
 
   start(): void {
@@ -49,7 +58,9 @@ export default class MainController {
       }
       if (this.heartsteel.trigger()) {
         this.lastTriggerTime = new Date().getTime();
-        window.navigator.vibrate?.([50, 20, 200]);
+        if (this.vibrateEnabled.value) {
+          window.navigator.vibrate?.([50, 20, 200]);
+        }
       }
     },
     100,

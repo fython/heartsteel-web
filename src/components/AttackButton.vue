@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { defineAsyncComponent, ref } from "vue";
 import AttackButtonClickSFX from "@/assets/media/attack_button_click.ogg";
+import { playSoundWithSettings } from "@/game/main-settings";
 
 const emits = defineEmits<{
   (event: "click"): void;
@@ -10,17 +11,16 @@ const swordsIcon = defineAsyncComponent(
   () => import("@/assets/icons/swords_FILL0_wght400_GRAD0_opsz48.svg")
 );
 
-const circleButtonSFX = ref<HTMLAudioElement | null>(null);
+const circleButtonSFX = ref<HTMLAudioElement>();
 
 const onClick = () => {
-  const sfx = circleButtonSFX.value;
-  if (sfx) {
-    sfx.currentTime = 0;
-    sfx.volume = 0.5;
-    sfx.play();
-  }
+  playSoundWithSettings(circleButtonSFX.value);
   emits("click");
 };
+
+defineExpose({
+  onClick,
+});
 </script>
 
 <template>
@@ -77,7 +77,11 @@ const onClick = () => {
   font-size: 32px;
 
   cursor: pointer;
-  user-focus: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 
   &::before {
@@ -90,7 +94,6 @@ const onClick = () => {
     opacity: 0;
     transition: opacity 0.15s linear;
 
-    user-focus: none;
     user-select: none;
   }
 
@@ -104,7 +107,6 @@ const onClick = () => {
     transform: translate(-50%, -50%) scale(75%);
     z-index: 5;
 
-    user-focus: none;
     user-select: none;
 
     fill: var(--circle-button-icon-fill);

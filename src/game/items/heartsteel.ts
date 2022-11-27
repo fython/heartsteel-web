@@ -1,6 +1,7 @@
 import randomInteger from "random-int";
 import type { Ref } from "vue";
 import { readonly, ref } from "vue";
+import { playSoundWithSettings } from "@/game/main-settings";
 
 interface HeartsteelResourcesProvider {
   getStackSFX(n: number): HTMLAudioElement;
@@ -97,9 +98,7 @@ class HeartsteelChargeProcess {
 
     // play sfx
     try {
-      audioEl.currentTime = 0;
-      audioEl.volume = 0.5;
-      await audioEl.play();
+      await playSoundWithSettings(audioEl);
     } catch (e) {
       console.error("failed to play sfx:", e);
       // throw exception?
@@ -132,6 +131,7 @@ class HeartsteelController {
     this.heroMaxHP = readonly(heroMaxHP);
 
     this.chargeProcess = new HeartsteelChargeProcess();
+    this.chargeProcess.isDebugging = true;
     this.chargeProcess.onStackCountChange = (n: number) => {
       this.currentChargeStack.value = n;
     };
@@ -150,9 +150,7 @@ class HeartsteelController {
       randomInteger(0, 2)
     );
     this.activeAudio = audioEl;
-    audioEl.currentTime = 0;
-    audioEl.volume = 0.5;
-    audioEl.play().catch((e) => {
+    playSoundWithSettings(audioEl).catch((e) => {
       console.error(e);
     });
     // grant bonus hp

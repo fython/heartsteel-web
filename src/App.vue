@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import HeartsteelIcon from "@/components/HeartsteelIcon.vue";
-import { computed, ref } from "vue";
+import { computed, provide, ref } from "vue";
 import HealthBar from "@/components/HealthBar.vue";
 import MainController from "@/game/main-controller";
 import PlayButton from "@/components/PlayButton.vue";
@@ -12,6 +12,7 @@ import RelatedLinks from "@/components/RelatedLinks.vue";
 
 const ctrl = new MainController();
 const isPlaying = ref(false);
+const attackButton = ref<AttackButton>();
 
 const maxHP = computed(() => {
   if (isPlaying.value) {
@@ -25,6 +26,14 @@ const play = () => {
   isPlaying.value = true;
   ctrl.start();
 };
+
+provide("main-controller", ctrl);
+
+document.addEventListener("keypress", (event) => {
+  if (event.code === "Space") {
+    attackButton.value?.onClick();
+  }
+});
 </script>
 
 <template>
@@ -53,6 +62,7 @@ const play = () => {
       <play-button v-show="!isPlaying" class="app-play-button" @click="play" />
       <attack-button
         v-show="isPlaying"
+        ref="attackButton"
         class="app-attack-button"
         @click="ctrl.doAttack()"
       />
@@ -158,7 +168,7 @@ main {
     position: absolute;
     inset: 0;
     background: black;
-    opacity: 0.8;
+    opacity: 0.6;
   }
 }
 </style>

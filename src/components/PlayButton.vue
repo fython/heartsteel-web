@@ -1,27 +1,24 @@
 <script setup lang="ts">
 import ItemBuySFX from "@/assets/media/item_buy.ogg";
 import { ref } from "vue";
+import { playSoundWithSettings } from "@/game/main-settings";
 
 const emits = defineEmits<{
   (event: "click"): void;
 }>();
 
-const itemBuySFX = ref<HTMLAudioElement | null>(null);
+const itemBuySFX = ref<HTMLAudioElement>();
 
 const onClick = () => {
-  const sfx = itemBuySFX.value;
-  if (sfx) {
-    sfx.currentTime = 0;
-    sfx.volume = 0.5;
-    sfx.play();
-  }
+  playSoundWithSettings(itemBuySFX.value);
   emits("click");
 };
 </script>
 
 <template>
-  <div>
+  <div class="play-button-container">
     <button class="play-button" @click="onClick">购买</button>
+    <span class="play-button-tips">（有音效请注意音量）</span>
 
     <audio
       class="item-buy-sfx"
@@ -33,6 +30,12 @@ const onClick = () => {
 </template>
 
 <style lang="less" scoped>
+.play-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .play-button {
   font-family: "Friz Quadrata Std Medium", sans-serif;
   font-size: 32px;
@@ -49,6 +52,13 @@ const onClick = () => {
   &:hover {
     background-color: #d2b48c;
   }
+}
+
+.play-button-tips {
+  margin-top: 4px;
+  color: #d2b48c;
+  font-size: 12px;
+  opacity: 0.7;
 }
 
 .item-buy-sfx {
