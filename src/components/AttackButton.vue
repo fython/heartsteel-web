@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { defineAsyncComponent, ref } from "vue";
-import AttackButtonClickSFX from "@/assets/media/attack_button_click.ogg";
+import AttackButtonClickSFX from "@/assets/media/attack_button_click.mp3";
 import { playSoundWithSettings } from "@/game/main-settings";
 
 const emits = defineEmits<{

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ItemBuySFX from "@/assets/media/item_buy.ogg";
+import ItemBuySFX from "@/assets/media/item_buy.mp3";
 import { ref } from "vue";
 import { playSoundWithSettings } from "@/game/main-settings";
 
