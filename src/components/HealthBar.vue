@@ -38,7 +38,8 @@ const progressBgStyle = computed(() => {
       rgba(255, 255, 255, 0.3),
       rgba(255, 255, 255, 0.05)
     );
-    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.25),
+    box-shadow:
+      0 0 1px 1px rgba(0, 0, 0, 0.25),
       inset 0 1px rgba(255, 255, 255, 0.1);
     background-color: var(--health-bar-background-color);
   }
@@ -55,6 +56,8 @@ const progressBgStyle = computed(() => {
   transform: translate(-50%, -50%);
 
   font-size: 18px;
-  text-shadow: 0 0 2px #000000, 0 0 4px #303030;
+  text-shadow:
+    0 0 2px #000000,
+    0 0 4px #303030;
 }
 </style>

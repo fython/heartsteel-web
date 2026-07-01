@@ -2,6 +2,7 @@
 import { inject, ref } from "vue";
 import { useMainSettings } from "@/game/main-settings";
 import type MainController from "@/game/main-controller";
+import { VueFinalModal } from "vue-final-modal";
 
 const qrcodeVisible = ref(false);
 const licenseVisible = ref(false);
@@ -160,11 +161,10 @@ const { soundEnabled, vibrateEnabled } = useMainSettings();
     <span class="divider">|</span>
     <div class="fake-a" @click="licenseVisible = true">设置 &amp; 帮助</div>
 
-    <vue-final-modal
-      class="qrcode-share-modal"
+    <VueFinalModal
+      class="qrcode-share-modal modal-container"
       v-model="qrcodeVisible"
       :esc-to-close="true"
-      classes="modal-container"
       content-class="modal-content"
     >
       <span class="modal__title">通过二维码分享 “心之钢模拟器”</span>
@@ -173,13 +173,12 @@ const { soundEnabled, vibrateEnabled } = useMainSettings();
         src="../assets/media/qrcode.png"
         alt="Heartsteel 网站"
       />
-    </vue-final-modal>
+    </VueFinalModal>
 
-    <vue-final-modal
-      class="license-modal"
+    <VueFinalModal
+      class="license-modal modal-container"
       v-model="licenseVisible"
       :esc-to-close="true"
-      classes="modal-container"
       content-class="modal-content"
     >
       <span class="modal__title">设置 &amp; 帮助</span>
@@ -263,7 +262,7 @@ const { soundEnabled, vibrateEnabled } = useMainSettings();
           </template>
         </div>
       </div>
-    </vue-final-modal>
+    </VueFinalModal>
   </div>
 </template>
 

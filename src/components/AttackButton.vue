@@ -8,7 +8,7 @@ const emits = defineEmits<{
 }>();
 
 const swordsIcon = defineAsyncComponent(
-  () => import("@/assets/icons/swords_FILL0_wght400_GRAD0_opsz48.svg")
+  () => import("@/assets/icons/swords_FILL0_wght400_GRAD0_opsz48.svg"),
 );
 
 const circleButtonSFX = ref<HTMLAudioElement>();

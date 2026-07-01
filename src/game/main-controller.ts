@@ -5,12 +5,13 @@ import { useMainSettings } from "@/game/main-settings";
 
 export default class MainController {
   private lastTriggerTime = 0;
-  private readonly vibrateEnabled: Ref<Boolean>;
+  private readonly vibrateEnabled: Ref<boolean>;
   heartsteel: HeartsteelController;
   baseHP: Ref<number>;
   bonusHP = computed(
-    () => this.heartsteel.itemBaseHP + this.heartsteel.itemBonusHP.value
+    () => this.heartsteel.itemBaseHP + this.heartsteel.itemBonusHP.value,
   );
+
   maxHP = computed(() => this.baseHP.value + this.bonusHP.value);
 
   constructor(baseHP = 1000) {
@@ -45,7 +46,7 @@ export default class MainController {
   saveSlot(): void {
     window.localStorage.setItem(
       "heartsteel:bonus_hp",
-      String(this.heartsteel.itemBonusHP.value)
+      String(this.heartsteel.itemBonusHP.value),
     );
   }
 
@@ -67,7 +68,7 @@ export default class MainController {
     {
       leading: true,
       trailing: false,
-    }
+    },
   );
 
   doAttack(): void {

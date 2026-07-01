@@ -109,7 +109,9 @@ watch(toRef(props, "stackCount"), (newVal, oldVal) => {
   font-size: var(--heartsteel-icon-stack-count-text-size);
   font-weight: 500;
 
-  text-shadow: 0 3px 2px #000000, 0 0 16px #303030;
+  text-shadow:
+    0 3px 2px #000000,
+    0 0 16px #303030;
 }
 
 .heartsteel-icon .icon-img {
