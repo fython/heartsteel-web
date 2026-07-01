@@ -12,7 +12,7 @@ interface HeartsteelResourcesProvider {
 let heartResourcesProviderInstance: HeartsteelResourcesProvider | null = null;
 
 function installHeartsteelResourcesProvider(
-  resources: HeartsteelResourcesProvider
+  resources: HeartsteelResourcesProvider,
 ): void {
   console.debug("installHeartsteelResourcesProvider:", resources);
   heartResourcesProviderInstance = resources;
@@ -48,7 +48,7 @@ class HeartsteelChargeProcess {
     // set tick interval to 750ms (or other settings)
     this.chargeIntervalCallback = window.setInterval(
       () => this.onChargeIntervalTick(),
-      CHARGE_INTERVAL_MS
+      CHARGE_INTERVAL_MS,
     );
     // trigger initial tick
     this.onChargeIntervalTick();
@@ -72,7 +72,7 @@ class HeartsteelChargeProcess {
     if (this.isDebugging) {
       console.debug(
         "HeartsteelChargeProcess::onChargeIntervalTick",
-        `count=${this.currentStackCount}`
+        `count=${this.currentStackCount}`,
       );
     }
     // notify current stack
@@ -81,17 +81,17 @@ class HeartsteelChargeProcess {
     let audioEl: HTMLAudioElement;
     if (this.currentStackCount < MAX_CHARGE_STACK_COUNT) {
       audioEl = heartResourcesProviderInstance!.getStackSFX(
-        this.currentStackCount
+        this.currentStackCount,
       );
     } else {
       audioEl = heartResourcesProviderInstance!.getThirdStackSFX(
-        randomInteger(0, 2)
+        randomInteger(0, 2),
       );
     }
     if (this.isDebugging) {
       console.debug(
         "HeartsteelChargeProcess::onChargeIntervalTick sfx_audio_el=",
-        audioEl
+        audioEl,
       );
     }
     this.activeAudio = audioEl;
@@ -147,7 +147,7 @@ class HeartsteelController {
     }
     // play trigger sfx
     const audioEl = heartResourcesProviderInstance!.getTriggerSFX(
-      randomInteger(0, 2)
+      randomInteger(0, 2),
     );
     this.activeAudio = audioEl;
     playSoundWithSettings(audioEl).catch((e) => {
