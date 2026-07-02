@@ -18,6 +18,9 @@ export default defineConfig({
       injectRegister: "inline",
       registerType: "autoUpdate",
       includeAssets: ["favicon.ico", "heartsteel-180px.png"],
+      workbox: {
+        skipWaiting: true,
+      },
       manifest: {
         name: "心之钢模拟器",
         short_name: "心之钢",
@@ -42,9 +45,6 @@ export default defineConfig({
             purpose: "any maskable",
           },
         ],
-      },
-      devOptions: {
-        enabled: true,
       },
     }),
   ],
