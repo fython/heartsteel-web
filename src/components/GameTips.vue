@@ -37,7 +37,7 @@ onMounted(() => {
 
 <template>
   <div class="game-tips">
-    <span class="game-tips-title">Tips: </span>{{ selectedTips }}
+    <span class="game-tips-title">{{ $t("tips.prefix") }}</span>{{ selectedTips }}
   </div>
 </template>
 

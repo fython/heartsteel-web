@@ -24,7 +24,7 @@ const volumeIconComponent = computed(() => {
   <div class="volume-slider" :class="{ disabled: !soundEnabled }">
     <button
       class="volume-icon-btn"
-      :aria-label="soundEnabled ? '静音' : '开启音效'"
+      :aria-label="soundEnabled ? $t('volume.mute') : $t('volume.unmute')"
       @click="soundEnabled = !soundEnabled"
     >
       <component :is="volumeIconComponent" :size="28" />
@@ -38,7 +38,7 @@ const volumeIconComponent = computed(() => {
       :value="volumePercent"
       :disabled="!soundEnabled"
       :style="{ '--volume-percent': volumePercent + '%' }"
-      :aria-label="`音量: ${volumePercent}%`"
+      :aria-label="$t('volume.volumeLabel', { percent: volumePercent })"
       @input="volumePercent = Number(($event.target as HTMLInputElement).value)"
     />
     <span class="volume-label">{{ volumePercent }}%</span>
