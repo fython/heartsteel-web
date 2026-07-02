@@ -19,7 +19,7 @@ export default class MainController {
 
     this.baseHP = ref(Math.max(baseHP, 500));
 
-    this.heartsteel = new HeartsteelController(this.baseHP);
+    this.heartsteel = new HeartsteelController(this.maxHP);
   }
 
   clearHeartsteelBonus(): void {

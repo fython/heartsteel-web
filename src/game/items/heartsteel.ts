@@ -18,8 +18,8 @@ function installHeartsteelResourcesProvider(
   heartResourcesProviderInstance = resources;
 }
 
-const MAX_CHARGE_STACK_COUNT = 4;
-const CHARGE_INTERVAL_MS = 750;
+const MAX_CHARGE_STACK_COUNT = 3;
+const CHARGE_INTERVAL_MS = 1000;
 
 class HeartsteelChargeProcess {
   private currentStackCount = 0;
@@ -114,21 +114,24 @@ class HeartsteelChargeProcess {
 }
 
 class HeartsteelController {
-  private readonly heroMaxHP: Readonly<Ref<number>>;
+  private readonly heroMaxHP: Ref<number>;
 
   private readonly chargeProcess: HeartsteelChargeProcess;
 
-  private readonly triggerGrantBonusHPBase = 12.5;
-  private readonly triggerGrantBonusHPPercentageMaxHP = 0.01 * 0.6;
+  // 庞然吞食：伤害 = 70 + 6% × 最大生命值
+  private readonly triggerDamageBase = 70;
+  private readonly triggerDamagePercentageMaxHP = 0.06;
+  // 永久生命值收益 = 实际造成伤害的 10%
+  private readonly triggerHPConversionRate = 0.1;
 
   private activeAudio: HTMLAudioElement | undefined = undefined;
 
-  readonly itemBaseHP = 800;
+  readonly itemBaseHP = 900;
   readonly itemBonusHP = ref(0);
   readonly currentChargeStack = ref(0);
 
   constructor(heroMaxHP: Ref<number>) {
-    this.heroMaxHP = readonly(heroMaxHP);
+    this.heroMaxHP = heroMaxHP;
 
     this.chargeProcess = new HeartsteelChargeProcess();
     this.chargeProcess.isDebugging = true;
@@ -153,8 +156,8 @@ class HeartsteelController {
     playSoundWithSettings(audioEl).catch((e) => {
       console.error(e);
     });
-    // grant bonus hp
-    this.itemBonusHP.value += this.triggerGrantBonusHPBase;
+    // grant bonus hp (10% of damage dealt)
+    this.itemBonusHP.value += this.triggerGrantBonusHP;
     // restart heartsteel charge process
     this.chargeProcess.reset();
     this.chargeProcess.start();
@@ -165,11 +168,17 @@ class HeartsteelController {
     this.activeAudio?.pause();
   }
 
-  get triggerGrantBonusHP(): number {
+  /** 庞然吞食被动伤害：70 + 6% × 最大生命值 */
+  get triggerDamage(): number {
     return (
-      this.triggerGrantBonusHPBase +
-      this.heroMaxHP.value * this.triggerGrantBonusHPPercentageMaxHP
+      this.triggerDamageBase
+      + this.heroMaxHP.value * this.triggerDamagePercentageMaxHP
     );
+  }
+
+  /** 触发后永久获得的最大生命值：实际伤害的 10% */
+  get triggerGrantBonusHP(): number {
+    return this.triggerDamage * this.triggerHPConversionRate;
   }
 }
 

@@ -50,8 +50,8 @@ document.addEventListener("keypress", (event) => {
       <!-- Introduce -->
       <span class="passive-text">
         <span class="passive-title">被动 - 庞然吞食：</span>
-        当 700 码内有一名敌方英雄时，会在 3
-        秒里持续充能一次对英雄的强力攻击。充能攻击会造成 125 + 你 6%
+        当 700 码内有一名敌方英雄时，会每秒叠加一层充能，最多叠加 3
+        层。对带有 3 层充能的目标进行攻击会造成 70 + 你 6%
         最大生命值的额外物理伤害，并为你提供相当于 10% 该伤害的永久
         最大生命值。<del>对每个目标有 30 秒冷却时间。</del>（这里没有冷却 :P）
       </span>
@@ -70,7 +70,7 @@ document.addEventListener("keypress", (event) => {
         v-if="isPlaying"
         class="app-progress-bar"
         :current="ctrl.heartsteel.currentChargeStack.value"
-        :max="4"
+        :max="3"
       />
       <!-- Help & About -->
       <game-tips class="app-game-tips" />
