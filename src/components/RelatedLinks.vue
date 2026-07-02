@@ -2,7 +2,8 @@
 import { inject, ref } from "vue";
 import { useMainSettings } from "@/game/main-settings";
 import type MainController from "@/game/main-controller";
-import { VueFinalModal } from "vue-final-modal";
+import SimpleModal from "@/components/SimpleModal.vue";
+import VolumeSlider from "@/components/VolumeSlider.vue";
 
 const qrcodeVisible = ref(false);
 const licenseVisible = ref(false);
@@ -40,31 +41,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.`,
-  },
-  {
-    name: "vue-final-modal",
-    sourceUrl: "https://github.com/vue-final/vue-final-modal",
-    licenses: `MIT License
-
-Copyright (c) 2019 Hunter
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.`,
   },
   {
     name: "lodash",
@@ -146,7 +122,7 @@ SOFTWARE.`,
   },
 ];
 
-const { soundEnabled, vibrateEnabled } = useMainSettings();
+const { vibrateEnabled } = useMainSettings();
 </script>
 
 <template>
@@ -161,44 +137,38 @@ const { soundEnabled, vibrateEnabled } = useMainSettings();
     <span class="divider">|</span>
     <div class="fake-a" @click="licenseVisible = true">设置 &amp; 帮助</div>
 
-    <VueFinalModal
-      class="qrcode-share-modal modal-container"
+    <SimpleModal
       v-model="qrcodeVisible"
       :esc-to-close="true"
-      content-class="modal-content"
     >
-      <span class="modal__title">通过二维码分享 “心之钢模拟器”</span>
+      <span class="modal__title">通过二维码分享 "心之钢模拟器"</span>
       <img
         class="qrcode-img"
         src="../assets/media/qrcode.png"
         alt="Heartsteel 网站"
       />
-    </VueFinalModal>
+    </SimpleModal>
 
-    <VueFinalModal
-      class="license-modal modal-container"
+    <SimpleModal
       v-model="licenseVisible"
       :esc-to-close="true"
-      content-class="modal-content"
     >
       <span class="modal__title">设置 &amp; 帮助</span>
       <div class="license-content">
         <div class="settings">
           <div class="license-subtitle">设置</div>
-          <input
-            type="checkbox"
-            v-model="soundEnabled"
-            id="settings-sound-enabled"
-          />
-          <label for="settings-sound-enabled">启用音效</label>
-          <br />
-          <input
-            type="checkbox"
-            v-model="vibrateEnabled"
-            id="settings-vibrate-enabled"
-          />
-          <label for="settings-vibrate-enabled">启用震动（针对移动设备）</label>
-          <br />
+          <div class="settings-row settings-row--volume">
+            <span class="settings-row-label">音效音量</span>
+            <VolumeSlider />
+          </div>
+          <div class="settings-row">
+            <input
+              type="checkbox"
+              v-model="vibrateEnabled"
+              id="settings-vibrate-enabled"
+            />
+            <label for="settings-vibrate-enabled">启用震动（针对移动设备）</label>
+          </div>
           <button @click="mainController?.clearHeartsteelBonus()">
             清空当前层数以及存档
           </button>
@@ -262,7 +232,7 @@ const { soundEnabled, vibrateEnabled } = useMainSettings();
           </template>
         </div>
       </div>
-    </VueFinalModal>
+    </SimpleModal>
   </div>
 </template>
 
@@ -289,29 +259,9 @@ const { soundEnabled, vibrateEnabled } = useMainSettings();
   }
 }
 
-:deep(.modal-container) {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-:deep(.modal-content) {
-  display: flex;
-  flex-direction: column;
-  margin: 0 1rem;
-  padding: 1rem;
-  max-width: calc(100vw - 32px);
-  max-height: calc(100vh - 64px);
-  border-radius: 0.25rem;
-  background: white;
-  color: #1a1a1a;
-  text-transform: none;
-  font-family: "Kanit", "Noto Sans SC", sans-serif;
-
-  .modal__title {
-    font-size: 18px;
-    font-weight: bold;
-  }
+.modal__title {
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .qrcode-img {
@@ -349,6 +299,34 @@ const { soundEnabled, vibrateEnabled } = useMainSettings();
     overflow: auto;
     padding: 8px;
     background-color: #f0f0f0;
+  }
+}
+
+.settings {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.settings-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  label {
+    cursor: pointer;
+  }
+}
+
+.settings-row--volume {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+
+  .settings-row-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
   }
 }
 </style>
