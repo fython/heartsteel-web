@@ -17,8 +17,8 @@ const onClick = () => {
 
 <template>
   <div class="play-button-container">
-    <button class="play-button" @click="onClick">购买</button>
-    <span class="play-button-tips">（有音效请注意音量）</span>
+    <button class="play-button" @click="onClick">{{ $t("playButton.buy") }}</button>
+    <span class="play-button-tips">{{ $t("playButton.soundTips") }}</span>
 
     <audio
       class="item-buy-sfx"

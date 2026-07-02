@@ -19,7 +19,8 @@
     "@vueuse/integrations": "^14.3.0",
     "lodash-es": "^4.18.1",
     "random-int": "^3.1.0",
-    "vue": "^3.5.39"
+    "vue": "^3.5.39",
+    "vue-i18n": "^11.4.6"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

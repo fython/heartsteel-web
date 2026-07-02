@@ -5,9 +5,20 @@ import { useMainSettings } from "@/game/main-settings";
 import type MainController from "@/game/main-controller";
 import SimpleModal from "@/components/SimpleModal.vue";
 import VolumeSlider from "@/components/VolumeSlider.vue";
+import { getLocale, setLocale, localeOptions, type Locale } from "@/i18n";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 
 const qrcodeVisible = ref(false);
 const licenseVisible = ref(false);
+const currentLocale = ref<Locale>(getLocale());
+
+const onLocaleChange = (event: Event) => {
+  const newLocale = (event.target as HTMLSelectElement).value as Locale;
+  setLocale(newLocale);
+  currentLocale.value = newLocale;
+};
 
 interface LibrariesLicenseInfo {
   name: string;
@@ -130,7 +141,7 @@ const { vibrateEnabled } = useMainSettings();
   <div class="related-links">
     <div class="fake-a" @click="qrcodeVisible = true">
       <Share2 :size="14" />
-      分享
+      {{ $t("relatedLinks.share") }}
     </div>
     <span class="divider">|</span>
     <a href="https://github.com/fython/heartsteel-web" target="_blank">
@@ -140,18 +151,18 @@ const { vibrateEnabled } = useMainSettings();
     <span class="divider">|</span>
     <div class="fake-a" @click="licenseVisible = true">
       <Settings :size="14" />
-      设置 &amp; 帮助
+      {{ $t("relatedLinks.settingsAndHelp") }}
     </div>
 
     <SimpleModal
       v-model="qrcodeVisible"
       :esc-to-close="true"
     >
-      <span class="modal__title">通过二维码分享 "心之钢模拟器"</span>
+      <span class="modal__title">{{ $t("relatedLinks.shareViaQR") }}</span>
       <img
         class="qrcode-img"
         src="../assets/media/qrcode.png"
-        alt="Heartsteel 网站"
+        alt="Heartsteel"
       />
     </SimpleModal>
 
@@ -159,12 +170,20 @@ const { vibrateEnabled } = useMainSettings();
       v-model="licenseVisible"
       :esc-to-close="true"
     >
-      <span class="modal__title">设置 &amp; 帮助</span>
+      <span class="modal__title">{{ $t("relatedLinks.settingsAndHelp") }}</span>
       <div class="license-content">
         <div class="settings">
-          <div class="license-subtitle">设置</div>
+          <div class="license-subtitle">{{ $t("relatedLinks.settings") }}</div>
+          <div class="settings-row">
+            <span class="settings-row-label">{{ $t("language.name") }}</span>
+            <select :value="currentLocale" @change="onLocaleChange" class="language-select">
+              <option v-for="opt in localeOptions" :key="opt.value" :value="opt.value">
+                {{ t(opt.labelKey) }}
+              </option>
+            </select>
+          </div>
           <div class="settings-row settings-row--volume">
-            <span class="settings-row-label">音效音量</span>
+            <span class="settings-row-label">{{ $t("relatedLinks.soundVolume") }}</span>
             <VolumeSlider />
           </div>
           <div class="settings-row">
@@ -173,56 +192,51 @@ const { vibrateEnabled } = useMainSettings();
               v-model="vibrateEnabled"
               id="settings-vibrate-enabled"
             />
-            <label for="settings-vibrate-enabled">启用震动（针对移动设备）</label>
+            <label for="settings-vibrate-enabled">{{ $t("relatedLinks.vibrateEnabled") }}</label>
           </div>
           <button @click="mainController?.clearHeartsteelBonus()">
-            清空当前层数以及存档
+            {{ $t("relatedLinks.clearData") }}
           </button>
         </div>
 
         <div class="how-to-play">
-          <div class="license-subtitle">玩法</div>
+          <div class="license-subtitle">{{ $t("relatedLinks.howToPlay") }}</div>
           <p>
-            购买心之钢后会模拟对附近敌人每秒叠加一层充能，最多 3 层。攻击按钮下方的进度充满时进行攻击，即可触发心之钢被动。
+            {{ $t("relatedLinks.howToPlayDesc1") }}
           </p>
           <p>
-            游戏玩法灵感来自《<a
+            {{ $t("relatedLinks.howToPlayDesc2") }}<a
               href="https://www.bilibili.com/video/BV1jM411r77W"
-              >半夜十二点，心之钢玩家的脑子</a
-            >》视频，业余时间不多开发周期较长，如有雷同纯属巧合。
+              >{{ $t("relatedLinks.howToPlayVideoTitle") }}</a
+            >{{ $t("relatedLinks.howToPlayDesc2Suffix") }}
           </p>
           <p>
-            本页面实现了 PWA
-            应用特性，你可以在支持的浏览器/平台上安装到本地使用。
+            {{ $t("relatedLinks.howToPlayDesc3") }}
           </p>
         </div>
 
         <div class="game-data-usage">
-          <div class="license-subtitle">版权及隐私声明</div>
+          <div class="license-subtitle">{{ $t("relatedLinks.copyrightTitle") }}</div>
           <p>
-            本页面是一个由爱好者二次创作的模拟小游戏，仅提供免费、非商业用途的服务，与官方立场无关。
+            {{ $t("relatedLinks.copyrightDesc1") }}
           </p>
           <p>
-            其中所使用的网络游戏美术、音效素材来自于互联网部分维基站点允许使用的资源，请在二次使用前了解清楚素材来源的使用条款。
-            游戏互动不涉及官方在线数据，亦不向第三方提交任何数据，请放心使用。
+            {{ $t("relatedLinks.copyrightDesc2") }}
           </p>
         </div>
 
         <div class="contact-me">
-          <div class="license-subtitle">联系我</div>
-          <p>如果您有任何疑问或建议可以通过以下电子邮箱联系我：</p>
+          <div class="license-subtitle">{{ $t("relatedLinks.contactMe") }}</div>
+          <p>{{ $t("relatedLinks.contactDesc") }}</p>
           <p><a href="mailto:fythonx@gmail.com">fythonx@gmail.com</a></p>
         </div>
 
         <div class="open-source-licenses">
-          <div class="license-subtitle">开源协议</div>
+          <div class="license-subtitle">{{ $t("relatedLinks.openSourceLicenses") }}</div>
           <p>
-            本项目离不开这些开源软件/字体的伟大付出，同时我们将使用 MIT License
-            发布本项目源代码于
-            <a href="https://github.com/fython/heartsteel-web" target="_blank"
+            {{ $t("relatedLinks.openSourceDesc") }}<a href="https://github.com/fython/heartsteel-web" target="_blank"
               >GitHub</a
             >
-            上
           </p>
 
           <template v-for="item in librariesLicenseInfo" :key="item.name">
@@ -327,6 +341,21 @@ const { vibrateEnabled } = useMainSettings();
 
   label {
     cursor: pointer;
+  }
+}
+
+.language-select {
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+
+  &:focus {
+    border-color: #c09b6a;
   }
 }
 
