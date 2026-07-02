@@ -12,8 +12,6 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-        with:
-          ref: prod
 
       - name: Setup Node
         uses: actions/setup-node@v6
@@ -37,7 +35,6 @@ jobs:
     name: Deploy
     needs: build
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/prod'
 
     steps:
       - name: Download artifact
