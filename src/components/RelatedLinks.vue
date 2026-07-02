@@ -177,7 +177,7 @@ const { vibrateEnabled } = useMainSettings();
         <div class="how-to-play">
           <div class="license-subtitle">玩法</div>
           <p>
-            购买心之钢后会模拟对附近敌人充能三秒，攻击按钮下方的进度充满时进行攻击，即可触发心之钢被动。
+            购买心之钢后会模拟对附近敌人每秒叠加一层充能，最多 3 层。攻击按钮下方的进度充满时进行攻击，即可触发心之钢被动。
           </p>
           <p>
             游戏玩法灵感来自《<a
