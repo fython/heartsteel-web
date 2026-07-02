@@ -2,8 +2,7 @@ name: Deploy production to GitHub Pages
 
 on:
   push:
-    branches:
-      - prod
+    branches: [master]
 
 jobs:
   build:
