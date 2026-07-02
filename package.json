@@ -14,13 +14,12 @@
     "@fontsource/kanit": "^5.2.8",
     "@fontsource/noto-sans-sc": "^5.2.9",
     "@fontsource/roboto-condensed": "^5.2.8",
+    "@lucide/vue": "^1.22.0",
     "@vueuse/core": "^14.3.0",
     "@vueuse/integrations": "^14.3.0",
-    "focus-trap": "^8.2.2",
     "lodash-es": "^4.18.1",
     "random-int": "^3.1.0",
-    "vue": "^3.5.39",
-    "vue-final-modal": "^4.5.5"
+    "vue": "^3.5.39"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

@@ -9,7 +9,6 @@ import HeartsteelAudioResources from "@/components/HeartsteelAudioResources.vue"
 import ChargingProgressBar from "@/components/ChargingProgressBar.vue";
 import GameTips from "@/components/GameTips.vue";
 import RelatedLinks from "@/components/RelatedLinks.vue";
-import { ModalsContainer } from "vue-final-modal";
 
 const ctrl = new MainController();
 const isPlaying = ref(false);
@@ -38,7 +37,6 @@ document.addEventListener("keypress", (event) => {
 </script>
 
 <template>
-  <ModalsContainer />
   <heartsteel-audio-resources />
 
   <main>
