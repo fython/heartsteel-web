@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { inject, ref } from "vue";
+import { Share2, ExternalLink, Settings } from "@lucide/vue";
 import { useMainSettings } from "@/game/main-settings";
 import type MainController from "@/game/main-controller";
 import SimpleModal from "@/components/SimpleModal.vue";
@@ -128,14 +129,19 @@ const { vibrateEnabled } = useMainSettings();
 <template>
   <div class="related-links">
     <div class="fake-a" @click="qrcodeVisible = true">
-      https://heartsteel.gwo.app
+      <Share2 :size="14" />
+      分享
     </div>
     <span class="divider">|</span>
     <a href="https://github.com/fython/heartsteel-web" target="_blank">
+      <ExternalLink :size="14" />
       GitHub
     </a>
     <span class="divider">|</span>
-    <div class="fake-a" @click="licenseVisible = true">设置 &amp; 帮助</div>
+    <div class="fake-a" @click="licenseVisible = true">
+      <Settings :size="14" />
+      设置 &amp; 帮助
+    </div>
 
     <SimpleModal
       v-model="qrcodeVisible"
@@ -254,8 +260,14 @@ const { vibrateEnabled } = useMainSettings();
     text-decoration: underline;
   }
 
+  a, .fake-a {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
   a {
-    color: #369d9b;
+    color: #fff;
   }
 }
 
